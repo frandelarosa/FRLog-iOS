@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1D685671A6A924A0095E69C /* FRLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D685661A6A924A0095E69C /* FRLog.m */; };
-		A1D6856A1A6A93320095E69C /* FRLogObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D685691A6A93320095E69C /* FRLogObject.m */; };
-		A1D6856D1A6AD28C0095E69C /* FRLogURL.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D6856C1A6AD28C0095E69C /* FRLogURL.m */; };
+		A1D685771A6B038B0095E69C /* FRLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D685711A6B038B0095E69C /* FRLog.m */; };
+		A1D685781A6B038B0095E69C /* FRLogObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D685731A6B038B0095E69C /* FRLogObject.m */; };
+		A1D685791A6B038B0095E69C /* FRLogURL.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D685761A6B038B0095E69C /* FRLogURL.m */; };
 		A1FAF0DA18732BDC0092BD3F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FAF0D918732BDC0092BD3F /* Foundation.framework */; };
 		A1FAF0DC18732BDC0092BD3F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FAF0DB18732BDC0092BD3F /* CoreGraphics.framework */; };
 		A1FAF0DE18732BDC0092BD3F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1FAF0DD18732BDC0092BD3F /* UIKit.framework */; };
@@ -40,13 +40,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A1D685651A6A924A0095E69C /* FRLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLog.h; sourceTree = "<group>"; };
-		A1D685661A6A924A0095E69C /* FRLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRLog.m; sourceTree = "<group>"; };
-		A1D685681A6A93320095E69C /* FRLogObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLogObject.h; sourceTree = "<group>"; };
-		A1D685691A6A93320095E69C /* FRLogObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRLogObject.m; sourceTree = "<group>"; };
-		A1D6856B1A6AD28C0095E69C /* FRLogURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLogURL.h; sourceTree = "<group>"; };
-		A1D6856C1A6AD28C0095E69C /* FRLogURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRLogURL.m; sourceTree = "<group>"; };
-		A1D6856E1A6AE3FC0095E69C /* FRLogTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FRLogTypes.h; sourceTree = "<group>"; };
+		A1D685701A6B038B0095E69C /* FRLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLog.h; sourceTree = "<group>"; };
+		A1D685711A6B038B0095E69C /* FRLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRLog.m; sourceTree = "<group>"; };
+		A1D685721A6B038B0095E69C /* FRLogObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLogObject.h; sourceTree = "<group>"; };
+		A1D685731A6B038B0095E69C /* FRLogObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRLogObject.m; sourceTree = "<group>"; };
+		A1D685741A6B038B0095E69C /* FRLogTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLogTypes.h; sourceTree = "<group>"; };
+		A1D685751A6B038B0095E69C /* FRLogURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRLogURL.h; sourceTree = "<group>"; };
+		A1D685761A6B038B0095E69C /* FRLogURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRLogURL.m; sourceTree = "<group>"; };
 		A1FAF0D618732BDC0092BD3F /* Testing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Testing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FAF0D918732BDC0092BD3F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A1FAF0DB18732BDC0092BD3F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -96,9 +96,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A1D6856F1A6B038B0095E69C /* FRLog */ = {
+			isa = PBXGroup;
+			children = (
+				A1D685701A6B038B0095E69C /* FRLog.h */,
+				A1D685711A6B038B0095E69C /* FRLog.m */,
+				A1D685721A6B038B0095E69C /* FRLogObject.h */,
+				A1D685731A6B038B0095E69C /* FRLogObject.m */,
+				A1D685741A6B038B0095E69C /* FRLogTypes.h */,
+				A1D685751A6B038B0095E69C /* FRLogURL.h */,
+				A1D685761A6B038B0095E69C /* FRLogURL.m */,
+			);
+			name = FRLog;
+			path = Testing/FRLog;
+			sourceTree = "<group>";
+		};
 		A1FAF0CD18732BDC0092BD3F = {
 			isa = PBXGroup;
 			children = (
+				A1D6856F1A6B038B0095E69C /* FRLog */,
 				A1FAF0E118732BDC0092BD3F /* Testing */,
 				A1FAF10718732BDC0092BD3F /* TestingTests */,
 				A1FAF0D818732BDC0092BD3F /* Frameworks */,
@@ -138,13 +154,6 @@
 				A1FAF11A187330590092BD3F /* ViewController.h */,
 				A1FAF11B187330590092BD3F /* ViewController.m */,
 				A1FAF11C187330590092BD3F /* ViewController.xib */,
-				A1D685651A6A924A0095E69C /* FRLog.h */,
-				A1D685661A6A924A0095E69C /* FRLog.m */,
-				A1D685681A6A93320095E69C /* FRLogObject.h */,
-				A1D685691A6A93320095E69C /* FRLogObject.m */,
-				A1D6856B1A6AD28C0095E69C /* FRLogURL.h */,
-				A1D6856C1A6AD28C0095E69C /* FRLogURL.m */,
-				A1D6856E1A6AE3FC0095E69C /* FRLogTypes.h */,
 			);
 			path = Testing;
 			sourceTree = "<group>";
@@ -275,13 +284,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1D6856A1A6A93320095E69C /* FRLogObject.m in Sources */,
+				A1D685791A6B038B0095E69C /* FRLogURL.m in Sources */,
 				A1FAF0EC18732BDC0092BD3F /* AppDelegate.m in Sources */,
-				A1D685671A6A924A0095E69C /* FRLog.m in Sources */,
+				A1D685781A6B038B0095E69C /* FRLogObject.m in Sources */,
 				A1FAF0E818732BDC0092BD3F /* main.m in Sources */,
-				A1D6856D1A6AD28C0095E69C /* FRLogURL.m in Sources */,
 				A1FAF11D187330590092BD3F /* ViewController.m in Sources */,
 				A1FAF0F218732BDC0092BD3F /* Testing.xcdatamodeld in Sources */,
+				A1D685771A6B038B0095E69C /* FRLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
