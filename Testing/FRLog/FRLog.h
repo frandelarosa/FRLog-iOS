@@ -9,6 +9,7 @@
 #import "FRLogObject.h"
 #import "FRLogURL.h"
 #import <Foundation/Foundation.h>
+#import "GCDAsyncUdpSocket.h"
 
 #ifdef DEBUG
     #define FRLogURL(fmt, ...)  { FRLogURL *frlobject = [FRLogURL new]; [frlobject setType:FRLogTypeURL]; [frlobject setUrl:[NSString stringWithFormat:fmt, ##__VA_ARGS__]]; [[FRLog sharedManager] sendLogObject:frlobject]; }
@@ -23,7 +24,9 @@
 #endif
 
 
-@interface FRLog : NSObject
+@interface FRLog : NSObject <GCDAsyncUdpSocketDelegate> {
+    GCDAsyncUdpSocket *clientSocket;
+}
 
 + (id)sharedManager;
 

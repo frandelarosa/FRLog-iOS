@@ -14,6 +14,7 @@
 #import "FRLog.h"
 #import "FRLogObject.h"
 
+
 @implementation FRLog
 
 #pragma mark -
@@ -33,6 +34,28 @@
 
 - (id)init {
     if (self = [super init]) {
+        
+        NSError *error = nil;
+        
+        clientSocket = [[GCDAsyncUdpSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+        
+        if (![clientSocket bindToPort:0 error:&error])
+        {
+            NSLog(@"Error binding: %@", error);
+            return nil;
+        }
+        if (![clientSocket beginReceiving:&error])
+        {
+            NSLog(@"Error receiving: %@", error);
+            return nil;
+        }
+        
+        NSLog(@"Ready");
+        
+        //[self sendTestMessage];
+
+        
+        
     }
     return self;
 }
@@ -58,14 +81,16 @@
     // Parse JSONDict into NSString
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:jsonDict options:NSJSONWritingPrettyPrinted error:&error];
-    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    //NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    [self sendData:jsonStr];
+    //[self sendData:jsonStr];
+    [clientSocket sendData:jsonData toHost:@"0.0.0.0" port:1283 withTimeout:-1 tag:1];
     
 }
 
 - (void)sendData:(NSString *)JSON_str {
     
+    /*
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     
@@ -79,9 +104,23 @@
                                                        completionHandler:nil];
     
     [dataTask resume];
-
+     */
+    
+    
     
 }
+
+- (void)sendTestMessage {
+    
+    NSString *test = @"Esto es una prueba";
+    NSData *data = [test dataUsingEncoding:NSUTF8StringEncoding];
+    
+    
+    
+    //[clientSocket writeData:data withTimeout:0 tag:1];
+    
+}
+
 
 #pragma mark -
 #pragma mark Parse
@@ -90,7 +129,7 @@
 - (NSDictionary *)parseObjectToDictionary:(FRLogObject *)log_obj {
     
     NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              [NSString stringWithFormat:@"%u", log_obj.type],      @"obj_type",
+                              [NSString stringWithFormat:@"%lu", (unsigned long)log_obj.type],      @"obj_type",
                               [NSString stringWithFormat:@"%@", log_obj.classname], @"obj_classname",
                               [NSString stringWithFormat:@"%@", log_obj.line],      @"obj_line",
                               [NSString stringWithFormat:@"%@", log_obj.content],   @"obj_content", nil];

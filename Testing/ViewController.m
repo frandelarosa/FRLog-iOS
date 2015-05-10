@@ -30,19 +30,28 @@
     
     [super viewDidLoad];
 
-    UIButton *BTN_sendPost = [[UIButton alloc] initWithFrame:CGRectMake(50, 100, 300, 100)];
+    UIButton *BTN_sendPost = [[UIButton alloc] initWithFrame:CGRectMake(50, 100, 200, 100)];
     [BTN_sendPost setBackgroundColor:[UIColor redColor]];
     [BTN_sendPost setTitle:@"POST" forState:UIControlStateNormal];
     [BTN_sendPost addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:BTN_sendPost];
     
+    [NSTimer scheduledTimerWithTimeInterval:3
+                                     target:self
+                                   selector:@selector(test)
+                                   userInfo:nil
+                                    repeats:YES];
+   
+    
 }
 
 - (void)test{
     
-    FRLogURL(@"http://www.myurl.com?req=get_users&init=10&limit=10");
+    //FRLogURL(@"http://jsonplaceholder.typicode.com/users");
     FRLogInfo(@"This is a Test");
+   // FRLogURL(@"http://headers.jsontest.com/");
+   // FRLogURL(@"http://echo.jsontest.com/key/value/one/two");
     
 }
 
