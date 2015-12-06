@@ -88,39 +88,6 @@
     
 }
 
-- (void)sendData:(NSString *)JSON_str {
-    
-    /*
-    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    
-    // Send generated string to server
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@:%@", SERVER_URL, SERVER_PORT]];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setHTTPMethod:@"POST"];
-    [urlRequest setHTTPBody:[JSON_str dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:urlRequest
-                                                       completionHandler:nil];
-    
-    [dataTask resume];
-     */
-    
-    
-    
-}
-
-- (void)sendTestMessage {
-    
-    NSString *test = @"Esto es una prueba";
-    NSData *data = [test dataUsingEncoding:NSUTF8StringEncoding];
-    
-    
-    
-    //[clientSocket writeData:data withTimeout:0 tag:1];
-    
-}
-
 
 #pragma mark -
 #pragma mark Parse
@@ -148,14 +115,13 @@
     
     if (rangeInit.location != NSNotFound) {
         // Find & character
-        NSRange rangeLimit    = [url rangeOfString:@"&" options:0 range:NSMakeRange(rangeInit.location, (url.length - rangeInit.location))];
+        NSRange rangeLimit = [url rangeOfString:@"&" options:0 range:NSMakeRange(rangeInit.location, (url.length - rangeInit.location))];
         requestName = [url substringWithRange:NSMakeRange(rangeInit.location + rangeInit.length, (rangeLimit.location - rangeInit.location - rangeInit.length))];
         [url_obj setRequestName:requestName];
         
     } else {
         // Not found
     }
-    
 
     NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                               [NSString stringWithFormat:@"%u", url_obj.type],        @"obj_type",

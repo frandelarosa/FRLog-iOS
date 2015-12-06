@@ -50,7 +50,7 @@
     
     //FRLogURL(@"http://jsonplaceholder.typicode.com/users");
     FRLogInfo(@"This is a Test");
-   // FRLogURL(@"http://headers.jsontest.com/");
+    // FRLogURL(@"http://headers.jsontest.com/?prueba&req=test");
    // FRLogURL(@"http://echo.jsontest.com/key/value/one/two");
     
 }
