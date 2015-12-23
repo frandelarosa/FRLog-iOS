@@ -33,6 +33,7 @@
 }
 
 - (id)init {
+    
     if (self = [super init]) {
         
         NSError *error = nil;
@@ -96,12 +97,16 @@
 - (NSDictionary *)parseObjectToDictionary:(FRLogObject *)log_obj {
     
     NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              [NSString stringWithFormat:@"%lu", (unsigned long)log_obj.type],      @"obj_type",
-                              [NSString stringWithFormat:@"%@", log_obj.classname], @"obj_classname",
-                              [NSString stringWithFormat:@"%@", log_obj.line],      @"obj_line",
-                              [NSString stringWithFormat:@"%@", log_obj.content],   @"obj_content", nil];
+                              [NSString stringWithFormat:@"%lu", (unsigned long)log_obj.type], @"obj_type",
+                              [NSString stringWithFormat:@"%@", log_obj.classname],            @"obj_classname",
+                              [NSString stringWithFormat:@"%@", log_obj.line],                 @"obj_line",
+                              [NSString stringWithFormat:@"%@", log_obj.content],              @"obj_content", nil];
     
-    return jsonDict;
+    NSDictionary *root = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          [NSString stringWithFormat:@"%@", @"1"], @"type",
+                          jsonDict, @"log", nil];
+    
+    return root;
     
 }
 
@@ -124,11 +129,15 @@
     }
 
     NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              [NSString stringWithFormat:@"%u", url_obj.type],        @"obj_type",
-                              [NSString stringWithFormat:@"%@", url_obj.requestName], @"obj_requestname",
-                              [NSString stringWithFormat:@"%@", url_obj.url],         @"obj_url", nil];
+                              [NSString stringWithFormat:@"%lu", (unsigned long)url_obj.type], @"obj_type",
+                              [NSString stringWithFormat:@"%@", url_obj.requestName],          @"obj_requestname",
+                              [NSString stringWithFormat:@"%@", url_obj.url],                  @"obj_url", nil];
     
-    return jsonDict;
+    NSDictionary *root = [[NSDictionary alloc] initWithObjectsAndKeys:
+                          [NSString stringWithFormat:@"%@", @"2"], @"type",
+                          jsonDict, @"log", nil];
+    
+    return root;
     
 }
 

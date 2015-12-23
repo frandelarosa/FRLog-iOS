@@ -48,7 +48,7 @@
 
 - (void)test{
     
-    //FRLogURL(@"http://jsonplaceholder.typicode.com/users");
+    FRLogURL(@"http://api.besoccer.com/scripts/api_manager/api.php?req=manager_config&hash=frandelarosa.rf@gmail.com");
     FRLogInfo(@"This is a Test");
     // FRLogURL(@"http://headers.jsontest.com/?prueba&req=test");
    // FRLogURL(@"http://echo.jsontest.com/key/value/one/two");
