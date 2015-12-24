@@ -11,9 +11,16 @@
 
 #define REQUEST_WORD @"req="
 
+#define FRLOG_OBJ_TYPE    @"obj_type"
+#define FRLOG_OBJ_DATE    @"obj_date"
+#define FRLOG_OBJ_CLASS   @"obj_classname"
+#define FRLOG_OBJ_LINE    @"obj_line"
+#define FRLOG_OBJ_CONTENT @"obj_content"
+#define FRLOG_OBJ_URL     @"obj_url"
+#define FRLOG_OBJ_REQ     @"obj_requestName"
+
 #import "FRLog.h"
 #import "FRLogObject.h"
-
 
 @implementation FRLog
 
@@ -94,17 +101,29 @@
 #pragma mark Parse
 #pragma mark -
 
+- (NSDictionary *)getDefaultDictionary:(id)logObj {
+
+    NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                              [NSString stringWithFormat:@"%li", [[logObj valueForKey:@"type"] integerValue]], FRLOG_OBJ_TYPE,
+                              [NSString stringWithFormat:@"%@",  [logObj  valueForKey:@"date"]],               FRLOG_OBJ_DATE,
+                              [NSString stringWithFormat:@"%@",  [logObj  valueForKey:@"classname"]],          FRLOG_OBJ_CLASS,
+                              [NSString stringWithFormat:@"%@",  [logObj  valueForKey:@"line"]],               FRLOG_OBJ_LINE,
+                              [NSString stringWithFormat:@"%@",  [logObj  valueForKey:@"content"]],            FRLOG_OBJ_CONTENT,
+                              nil];
+    
+    return jsonDict;
+    
+    
+}
+
 - (NSDictionary *)parseObjectToDictionary:(FRLogObject *)log_obj {
     
-    NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              [NSString stringWithFormat:@"%lu", (unsigned long)log_obj.type], @"obj_type",
-                              [NSString stringWithFormat:@"%@", log_obj.classname],            @"obj_classname",
-                              [NSString stringWithFormat:@"%@", log_obj.line],                 @"obj_line",
-                              [NSString stringWithFormat:@"%@", log_obj.content],              @"obj_content", nil];
+    // Add common properties
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:[self getDefaultDictionary:log_obj]];
     
     NSDictionary *root = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          [NSString stringWithFormat:@"%@", @"1"], @"type",
-                          jsonDict, @"log", nil];
+                          [NSString stringWithFormat:@"%li", FRLogTypeInfo], @"type",
+                          dict, @"log", nil];
     
     return root;
     
@@ -127,18 +146,20 @@
     } else {
         // Not found
     }
-
-    NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              [NSString stringWithFormat:@"%lu", (unsigned long)url_obj.type], @"obj_type",
-                              [NSString stringWithFormat:@"%@", url_obj.requestName],          @"obj_requestname",
-                              [NSString stringWithFormat:@"%@", url_obj.url],                  @"obj_url", nil];
+    
+    // Add common properties
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:[self getDefaultDictionary:url_obj]];
+    
+    // Custom properties
+    [dict setObject:[NSString stringWithFormat:@"%@", url_obj.url]         forKey:FRLOG_OBJ_URL];
+    [dict setObject:[NSString stringWithFormat:@"%@", url_obj.requestName] forKey:FRLOG_OBJ_REQ];
     
     NSDictionary *root = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          [NSString stringWithFormat:@"%@", @"2"], @"type",
-                          jsonDict, @"log", nil];
+                          [NSString stringWithFormat:@"%li", FRLogTypeURL], @"type",
+                          dict, @"log", nil];
     
     return root;
-    
+
 }
 
 

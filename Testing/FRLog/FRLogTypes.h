@@ -7,7 +7,7 @@
 //
 
 typedef NS_ENUM(NSUInteger, FRLogType) {
-    FRLogTypeURL = 1,
-    FRLogTypeInfo = 2,
+    FRLogTypeInfo = 1,
+    FRLogTypeURL = 2,
     FRLogTypeError = 3
 };
