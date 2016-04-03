@@ -25,14 +25,17 @@
     
     static FRLog *sharedMyManager = nil;
     static dispatch_once_t onceToken;
+    
     dispatch_once(&onceToken, ^{
         sharedMyManager = [[self alloc] init];
     });
+    
     return sharedMyManager;
     
 }
 
 - (id)init {
+    
     if (self = [super init]) {
         
         NSError *error = nil;
@@ -95,11 +98,19 @@
 
 - (NSDictionary *)parseObjectToDictionary:(FRLogObject *)log_obj {
     
+    // Date
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd-MM-YYYY HH:mm:ss.SSS"];
+    NSString *dateStr = [dateFormat stringFromDate:[NSDate date]];
+    [log_obj setDate:dateStr];
+    
     NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              [NSString stringWithFormat:@"%lu", (unsigned long)log_obj.type],      @"obj_type",
-                              [NSString stringWithFormat:@"%@", log_obj.classname], @"obj_classname",
-                              [NSString stringWithFormat:@"%@", log_obj.line],      @"obj_line",
-                              [NSString stringWithFormat:@"%@", log_obj.content],   @"obj_content", nil];
+                              [NSString stringWithFormat:@"%lu", (unsigned long)log_obj.type], @"obj_type",
+                              [NSString stringWithFormat:@"%@", log_obj.classname],            @"obj_classname",
+                              [NSString stringWithFormat:@"%@", log_obj.line],                 @"obj_line",
+                              [NSString stringWithFormat:@"%@", log_obj.content],              @"obj_content",
+                              [NSString stringWithFormat:@"%@", log_obj.date],                 @"obj_date",
+                              nil];
     
     return jsonDict;
     
@@ -114,19 +125,34 @@
     NSRange rangeInit = [url rangeOfString:REQUEST_WORD];
     
     if (rangeInit.location != NSNotFound) {
+        
         // Find & character
         NSRange rangeLimit = [url rangeOfString:@"&" options:0 range:NSMakeRange(rangeInit.location, (url.length - rangeInit.location))];
-        requestName = [url substringWithRange:NSMakeRange(rangeInit.location + rangeInit.length, (rangeLimit.location - rangeInit.location - rangeInit.length))];
+        
+        if (rangeLimit.location > url.length){
+            requestName = [url substringFromIndex:rangeInit.location + rangeInit.length];
+        }else {
+            requestName = [url substringWithRange:NSMakeRange(rangeInit.location + rangeInit.length, (rangeLimit.location - rangeInit.location - rangeInit.length))];
+        }
+
         [url_obj setRequestName:requestName];
         
     } else {
         // Not found
     }
+    
+    // Date
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"dd-MM-YYYY HH:mm:ss.SSS"];
+    NSString *dateStr = [dateFormat stringFromDate:[NSDate date]];
+    [url_obj setDate:dateStr];
 
     NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              [NSString stringWithFormat:@"%u", url_obj.type],        @"obj_type",
-                              [NSString stringWithFormat:@"%@", url_obj.requestName], @"obj_requestname",
-                              [NSString stringWithFormat:@"%@", url_obj.url],         @"obj_url", nil];
+                              [NSString stringWithFormat:@"%lu", (unsigned long)url_obj.type], @"obj_type",
+                              [NSString stringWithFormat:@"%@", url_obj.requestName],          @"obj_requestname",
+                              [NSString stringWithFormat:@"%@", url_obj.url],                  @"obj_url",
+                              [NSString stringWithFormat:@"%@", url_obj.date],                 @"obj_date",
+                              nil];
     
     return jsonDict;
     

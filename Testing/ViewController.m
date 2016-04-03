@@ -50,7 +50,9 @@
     
     //FRLogURL(@"http://jsonplaceholder.typicode.com/users");
     FRLogInfo(@"This is a Test");
-    // FRLogURL(@"http://headers.jsontest.com/?prueba&req=test");
+    NSArray *testArray = @[@"2", @"3", @"4"];
+    FRLogInfo(@"ARRAY CONTENT: %@", testArray);
+    FRLogURL(@"http://headers.jsontest.com/?prueba&req=test");
    // FRLogURL(@"http://echo.jsontest.com/key/value/one/two");
     
 }

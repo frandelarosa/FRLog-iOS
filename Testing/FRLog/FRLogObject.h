@@ -15,6 +15,6 @@
 @property (nonatomic, strong) NSString *classname;
 @property (nonatomic, strong) NSString *line;
 @property (nonatomic, strong) NSString *content;
-
+@property (nonatomic, strong) NSString *date;
 
 @end
