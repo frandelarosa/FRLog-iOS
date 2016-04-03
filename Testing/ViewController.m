@@ -48,7 +48,7 @@
 
 - (void)test{
     
-    //FRLogURL(@"http://jsonplaceholder.typicode.com/users");
+    FRLogURL(@"http://api.besoccer.com/scripts/api_manager/api.php?req=manager_config&hash=frandelarosa.rf@gmail.com");
     FRLogInfo(@"This is a Test");
     NSArray *testArray = @[@"2", @"3", @"4"];
     FRLogInfo(@"ARRAY CONTENT: %@", testArray);

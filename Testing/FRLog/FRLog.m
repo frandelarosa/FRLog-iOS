@@ -56,7 +56,7 @@
         NSLog(@"Ready");
         
         //[self sendTestMessage];
-
+        
         
         
     }
@@ -66,6 +66,7 @@
 - (void)dealloc {
     // Should never be called, but just here for clarity really.
 }
+
 
 #pragma mark -
 #pragma mark Send
@@ -134,11 +135,11 @@
         }else {
             requestName = [url substringWithRange:NSMakeRange(rangeInit.location + rangeInit.length, (rangeLimit.location - rangeInit.location - rangeInit.length))];
         }
-
+        
         [url_obj setRequestName:requestName];
         
     } else {
-        // Not found
+        requestName = @"REQUEST NAME NOT FOUND";
     }
     
     // Date
@@ -146,7 +147,7 @@
     [dateFormat setDateFormat:@"dd-MM-YYYY HH:mm:ss.SSS"];
     NSString *dateStr = [dateFormat stringFromDate:[NSDate date]];
     [url_obj setDate:dateStr];
-
+    
     NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                               [NSString stringWithFormat:@"%lu", (unsigned long)url_obj.type], @"obj_type",
                               [NSString stringWithFormat:@"%@", url_obj.requestName],          @"obj_requestname",
